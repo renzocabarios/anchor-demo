@@ -7,7 +7,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY ?? "";
 const ETHER_API_KEY = process.env.ETHER_API_KEY ?? "";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.19",
+  solidity: "0.8.20",
   networks: {
     sepolia: {
       url: ARBITRUM_SEPOLIA_URL,
@@ -19,8 +19,21 @@ const config: HardhatUserConfig = {
       chainId: 421614,
     },
   },
+  sourcify: {
+    enabled: true,
+  },
   etherscan: {
     apiKey: ETHER_API_KEY,
+    customChains: [
+      {
+        network: "arbsep",
+        chainId: 421614,
+        urls: {
+          apiURL: "https://api-sepolia.arbiscan.io/api",
+          browserURL: "https://sepolia.arbiscan.io/",
+        },
+      },
+    ],
   },
 };
 
